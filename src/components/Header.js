@@ -6,12 +6,20 @@ import microphone from "../assets/microphone.svg";
 import camera from "../assets/camera.png";
 import bell from "../assets/bell.png";
 import user from "../assets/user.png";
+import { toggleMenu } from "../utils/appSlice";
+import { useDispatch } from "react-redux";
+
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const handleToggleMenu=()=>{
+    dispatch(toggleMenu())
+  }
   return (
     <div className="flex flex-nowrap align-middle justify-between p-x-4 gap-x-8">
       <div className="left-section flex py-2 gap-x-4">
-        <img alt="icon" src={hamburgerMenu} className="h-6"></img>
+        <img alt="icon" src={hamburgerMenu} className="h-6 cursor-pointer" 
+        onClick={()=>{handleToggleMenu()}}></img>
         <img alt="logo" src={logo} className="h-5 pt-1"></img>
       </div>
       <div className="middle-section flex flex-nowrap align-middle basis-full">
