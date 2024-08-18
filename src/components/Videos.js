@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Video from "./Video";
 import { VIDEOS_API } from "../utils/constants";
+import Shirm from "./Shirm";
 
 const Videos=()=>{
     
-    const [videos , setVideos] = useState([]);
+    const [videos , setVideos] = useState({});
 
     useEffect(()=>{
         getVideos();
@@ -14,13 +15,14 @@ const Videos=()=>{
         const response = await fetch(VIDEOS_API);
         const data = await response.json();
         console.log(data);
-        setVideos(data.items)
+        setVideos(data);
     }
 
-    return (
-        
+    return Object.keys(videos).length===0
+        ?<Shirm/>
+        :(
         <div className="flex flex-wrap justify-between gap-8">
-              {videos.map(v=><Video id={v.id}/>)}
+              {videos.items.map(v=><Video key={v.id} videoData={v}/>)}
         </div>
     );
 };

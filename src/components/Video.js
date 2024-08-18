@@ -1,7 +1,11 @@
-const Video=({id})=>{
+const Video=({videoData})=>{
+    
+    const {snippet, statistics} = videoData;
+    const {viewCount,likeCount,favoriteCount,commentCount}=statistics;
     return (
-        <div>
-            <h1>{id}</h1>
+        <div className="vido-container border-2 basis-1/3">
+            <h1>{snippet.title.split('|')[0]}</h1>
+            <h2>{viewCount}</h2>
         </div>
     );
 };
