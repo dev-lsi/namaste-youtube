@@ -7,7 +7,7 @@ const SideBar=()=>{
     return !isMenuOpen
     ?null
     :(
-        <div className="side-bar flex flex-col gap-2 px-2 border w-min border-slate-500">
+        <div className="side-bar flex flex-col gap-2 px-2 border w-min border-slate-200">
             <h1>{JSON.stringify(isMenuOpen)}</h1>
            <SidebarSection/>
            <SidebarSection/>

@@ -1,13 +1,13 @@
 const Shirm=()=>{
-    const ShirmCard=()=>{
+    const ShirmCard = () => {
         return (
-            <div className="chirm-card w-1/4 max-h-6 bg-slate-300">
+            <div className="shirm-card w-48 h-64 bg-slate-100">
 
             </div>
         )
     }
 
-    const generateCards = (count) => {
+    const generateShirmCards = (count) => {
         const res=[];
         for (let i = 0; i < count; i++) {
             res.push(<ShirmCard key={i}/>)
@@ -15,9 +15,9 @@ const Shirm=()=>{
         return res;
     }
     return (
-        <div className="shirm flex flex-wrap">
+        <div className="shirm flex flex-wrap justify-between gap-y-4">
            { 
-             generateCards(12)
+             generateShirmCards(Number(12))
            }
         </div>
     )

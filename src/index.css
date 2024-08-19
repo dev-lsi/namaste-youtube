@@ -2,4 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+.video{
+    width:20%;
+}
+
+@media (max-width: 500px) {
+    .video {
+       width: 100%;
+    }
+}
+@media (min-width:501px) and (max-width:900px) {
+    .video {
+       width: 40%;
+    }
+}
+
+@media (min-width:901px) {
+    .video {
+       width: 30%;
+    }
+}
+
 

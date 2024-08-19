@@ -3,7 +3,7 @@ import Videos from "./Videos";
 
 const Main=()=>{
     return (
-        <div className="flex-col flex-nowrap">
+        <div className="flex flex-wrap justify-center">
             <Buttons/>
             <Videos/>
         </div>
