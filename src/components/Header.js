@@ -18,6 +18,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const [searchQuery,setSearchQuery]=useState("");
   const [suggestions,setSuggestions]=useState([]);
+  const[areShownSuggestions,setAreShownSuggestions]=useState(false)
   useEffect(()=>{
     const timer= setTimeout(()=>getSuggestions(),400)
     return ()=>clearTimeout(timer)
@@ -52,9 +53,11 @@ const Header = () => {
             " border border-slate-400 rounded-l-full basis-full w-full h-8 focus:outline-none focus:border-slate-600 pl-4"
             value={searchQuery}
             onChange={(e)=>setSearchQuery(e.target.value)}
+            onFocus={()=>setAreShownSuggestions(true)}
+            onBlur={()=>setAreShownSuggestions(false)}
           ></input>
           <ul className="flex-col w-full absolute   mt-2 bg-slate-100">
-            {suggestions.map(s=><li className="hover:bg-slate-200 hover:cursor-default" key={s}>🔍 {s}</li>)}
+            {areShownSuggestions&&suggestions.map(s=><li className="hover:bg-slate-200 hover:cursor-default" key={s}>🔍 {s}</li>)}
           </ul>
         </div>
 
