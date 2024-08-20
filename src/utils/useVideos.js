@@ -11,7 +11,6 @@ export const useVideos = () => {
   async function getVideos() {
     const response = await fetch(VIDEOS_API);
     const data = await response.json();
-    console.log(data)
     setVideos(data);
   }
 

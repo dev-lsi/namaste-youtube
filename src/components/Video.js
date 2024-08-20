@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
-const Video=({videoData})=>{
+const Video=({videoData, currClass})=>{
     
     const {snippet, statistics, id, etag} = videoData;
     const {viewCount,likeCount,favoriteCount,commentCount}=statistics;
     const{ title, channelTitle } = snippet;
-
+    console.log(videoData.snippet.thumbnails.medium.height)
     return (
-        <div className="video border-0">
-            <Link to={"/watch/"+id} alt={""}>
+        <div className="video">
+            <Link to={"/watch/"+ id} alt={""}>
                 <img 
                     alt="thumbnail" 
                     src={snippet.thumbnails.medium.url}>
@@ -26,5 +26,17 @@ const Video=({videoData})=>{
         </div>
     );
 };
+
+export const VideoPlus = (Video) => {
+           
+            return ({key,videoData})=>{
+                console.log(videoData.snippet.thumbnails.medium.height)
+                return (
+                    <div className={"video"}>
+                        <Video key={key} videoData={videoData} className={""}/>
+                    </div>
+                )
+            }
+}
 
 export default Video;

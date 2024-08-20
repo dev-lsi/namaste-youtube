@@ -9,11 +9,24 @@ import user from "../assets/user.png";
 import { toggleMenu } from "../utils/appSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { SUGGESTIONS_API_URL } from "../utils/constants";
 
 
 
 const Header = () => {
   const dispatch = useDispatch()
+  const [searchQuery,setSearchQuery]=useState("");
+  const [suggestions,setSuggestions]=useState([]);
+  useEffect(()=>{
+    const timer= setTimeout(()=>getSuggestions(),400)
+    return ()=>clearTimeout(timer)
+  },[searchQuery])
+  const getSuggestions=async ()=>{
+    const response=await fetch(SUGGESTIONS_API_URL+searchQuery);
+    const data = await response.json();
+    setSuggestions(data[1])
+  }
   const handleToggleMenu=()=>{
     dispatch(toggleMenu())
   }
@@ -31,13 +44,19 @@ const Header = () => {
         
       </div>
       <div className="middle-section flex flex-nowrap align-middle basis-full">
-        <input
-          type="text"
-          placeholder="Search"
-          className=" border border-slate-400 rounded-l-full basis-full w-full h-8 
-                    focus:outline-none focus:border-slate-600 pl-4
-                    "
-        ></input>
+        <div className="w-full relative">
+          <input
+            type="text"
+            placeholder="Search"
+            className=
+            " border border-slate-400 rounded-l-full basis-full w-full h-8 focus:outline-none focus:border-slate-600 pl-4"
+            value={searchQuery}
+            onChange={(e)=>setSearchQuery(e.target.value)}
+          ></input>
+          <ul className="flex-col w-full absolute   mt-2 bg-slate-100">
+            {suggestions.map(s=><li className="hover:bg-slate-200 hover:cursor-default" key={s}>🔍 {s}</li>)}
+          </ul>
+        </div>
 
         <button className="border border-slate-400 w-12 h-8 rounded-r-full bg-slate-100 pl-3 pt-0 flex-shrink-0">
           <img alt="search" src={search} className="w-6 h-6 flex-shrink-0" />
