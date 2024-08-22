@@ -7,10 +7,12 @@ import camera from "../assets/camera.png";
 import bell from "../assets/bell.png";
 import user from "../assets/user.png";
 import { toggleMenu } from "../utils/appSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SUGGESTIONS_API_URL } from "../utils/constants";
+import { addToCache } from "../utils/serchSlice";
+import { searchSlice } from "../utils/serchSlice";
 
 
 
@@ -18,8 +20,13 @@ const Header = () => {
   const dispatch = useDispatch()
   const [searchQuery,setSearchQuery]=useState("");
   const [suggestions,setSuggestions]=useState([]);
-  const[areShownSuggestions,setAreShownSuggestions]=useState(false)
+  const[areShownSuggestions,setAreShownSuggestions]=useState(false);
+  const cache = useSelector(()=>searchSlice.state)
+  const dispatchAddToCache = useDispatch(()=>addToCache())
+  
+
   useEffect(()=>{
+
     const timer= setTimeout(()=>getSuggestions(),400)
     return ()=>clearTimeout(timer)
   },[searchQuery])
